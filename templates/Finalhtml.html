@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+ <style>
+ 
+ h1 {text-align: center;}
+ 
+p {text-align: center;}
+div {text-align: center;}
+
+ </style>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+
+<body style="background-color:white;">
+ 
+ 
+ <div class="login">
+        <img src="https://innodatatics.ai/assets/innologo.png">
+         
+	<h1 style="color:blue;">Profitable & least pollution emission vehicle suggestion in Logistic Industry </h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	
+        
+        
+                    <label for="X">Payload:</label>
+
+        <select name="Payload">
+           
+             
+          <option value="1000"> 1 Metric Ton</option>
+          
+          <option value="1500">1.5 Metric ton</option>
+          <option value="2000">2 Metric ton</option>
+          <option value="3000">3 Metric ton</option>
+          <option value="4500">4.5 Metric ton</option>
+          <option value="5000">5 Metric ton</option>
+          <option value="7000">7 Metric ton</option>
+          <option value="7200">7.2 Metric ton</option>
+          <option value="8000">8 Metric ton</option>
+          <option value="8500">8.5 Metric ton</option>
+          <option value="9000">9 Metric ton</option>
+          <option value="9500">9.5 Metric ton</option>
+          <option value="12600">12.6 Metric ton</option>
+          <option value="14000">14 Metric ton</option>
+          <option value="15000">15 Metric ton</option>
+          <option value="16000">16 Metric ton</option>
+          <option value="18000">18 Metric ton</option>
+          <option value="18500">18.5 Metric ton</option>
+          <option value="20000">20 Metric ton</option>
+          <option value="21000">21 Metric ton</option>
+          <option value="22000">22 Metric ton</option>
+          <option value="25000">25 Metric ton</option>
+          <option value="27000">27 Metric ton</option>
+          <option value="30000">30 Metric ton</option>
+          <option value="35000">35 Metric ton</option>
+          
+         
+          
+                 
+                     
+                    
+          
+        </select>
+                      <br><br>    
+           
+            		
+		
+             
+            <label for="X">Type:</label>
+
+<select name="Type">
+   
+     
+  <option value="0">Closed- only upto 22MT PayLoad</option>
+  
+  <option value="1">Open- available up to 30Mt PayLoad</option>
+ 
+  
+         
+             
+            
+  
+</select>
+              <br><br>
+             
+
+           <label for="X">Distance & Load Condition:</label>
+
+<select name="Level_of_Course">
+    <option value="0">Greater than 150 km and above 2000kg</option>
+  <option value="1">Less than 150km and less than 2000kg</option>
+  
+
+  
+</select> 
+        <br>
+        <br>
+
+ <label for="X">region/non_region:</label>
+
+<select name="Region/non_region:">
+    <option value="0">Non_Region-25ft and above, 3MT and above</option>
+  <option value="1">Region -Less than 25ftand below 3MT</option>
+  
+
+
+  
+</select> 
+<br>
+<br>
+
+            
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Suggest</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+   <br>
+   <br>
+   <p><b>Check below vehicle name by vehicle index<b> </p>
+   
+   <div>
+   
+
+ 
+ <script>
+    function myfun()
+    {
+      var a= document.getElementById('number').value;
+      const list =["1 MT Tata Ace (Closed Body)-6 litre/100km","1 MT Tata Ace (Open Body)-5 litre/100km",
+      "1.5 MT Tata Ace Pickup (Open Body)-7 litre/100km","1.5 MT Tata Ace Vehicle (Closed Body)-7 litre/100km",
+      "14 FT Open - 3 MT-11 litre/100km","15 FT Single-Axle 7.2MT (8.5 H) Container - HCV -10 litre/100km","17 FT Container-8 litre/100km",
+      "17 FT Open 5MT - MCV - 8 litre/100km",
+      "19 FT Open 7MT - MCV- 10 litre/100km","19 FT OPEN BODY 8 MT-8 litre/100km","19 FT SXL Container- 6 litre/100km","20 FT CLOSE 7MT-MCV-9 litre/100km",
+      "20 FT Closed Container 8MT -12 litre/100km","20FT Open 9MT-MCV -13 litre/100km","20FT SXL Container-12 litre/100km","22 FT Closed Container-11 litre/100km",
+      "22 FT Open Body 16MT-13 litre/100km","22 FT Taurus Open 16MT-HCV-12 litre/100km","24/26 FT Closed Container 20MT-HCV-14 litre/100km",
+      "24/26 FT Taurus Open 21MT-HCV-14 litre/100km","24|26 FT Taurus 21MT-15 litre/100km","24FT SXL Container-12 litre/100km","25 FT Closed Body 20MT-14 litre/100km",
+      "25 FT Open Body 21MT-15 litre/100km","26FT Taurus Open 27MT-HCV-27 litre/100km","27 Ft Open Body 21MT-14 litre/100km","28FT Open Body 25MT- 30 litre/100km",
+      "30 FT Open MXL 30MT- 40 litre/100km","30 FT Open SXL 30MT- 42 litre/100km","31FT Open Body 18MT- 14 litre/100km","32 FT Closed Container 15MT-14 litre/100km",
+      "32 FT Multi-Axle 14MT-HCV- 18 litre/100km","32 Ft Multi-Axle MXL 18MT-19 litre/100km","32FT Open Taurus- 28 litre/100km","32FT Single-Axle 7MT-HCV-17 litre/100km",
+      "37 FT Trailer Open-29 litre/100km","40 FT 3XL Trailer 35MT-38 litre/100km","40 FT Flat Bed Double-Axle 21 MT Trailer-40",
+      "40 FT Flat Bed Multi-Axle 27MT Trailer-39 litre/100km","40 FT Flat Bed Single-Axle 20MT Trailer-35 litre/100km",
+      "50FT Flat Bed 30MT Trailer-41","Mahindra LCV 1MT -5","Tata 407/14FT Open 3MT-LCV-13 litre/100km",
+      "Tata 407 Open 2 MT mini-LCV-12 litre/100km"]
+      
+      document.getElementById('result').innerHTML=(list[a]);
+      
+    }
+  
+  </script>
+
+  
+   <input type="number" value="" id="number" placeholder="Vehicle Index Number"><br><br>
+   
+  
+  <input type="submit" value="Check" onclick="return myfun()"> <br><br>
+  <b> The Suggesting Vehicle is:</b><br><br>
+  <span id="result"></span><br><br>
+  
+  <a href="https://environmental-impact.herokuapp.com/">To check Pollution Emission Click here </a>
+  
+
+  
+
+
+   </div>
+<p style="color:red;">Note: If you got unsatisfied suggestion regarding payload that means vehicle may not in your given requirements. </p>
+<p style="color:red;">So please try with different combinations then may be satisfying vehicle will come</p>
+
+   
+ </div>
+
+
+</body>
+</html>
